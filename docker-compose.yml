@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  nlp_fastapi_server:
+    container_name: nlp_fastapi_server
+    build: ./nlp_api
+    restart: always
+    command: "sh -c 'alembic upgrade head && uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'"
+    volumes:
+      - ./nlp_api:/code
+    expose:
+      - "8000"
+    ports:
+      - 8000:8000
+    env_file: ".env"
+    depends_on:
+      - nlp_database
+  
+  nlp_database:
+    image: bitnami/postgresql:13.3.0
+    restart: always
+    container_name: nlp_database
+    env_file: ".env"
+    user: root
+    volumes:
+      - ./db_docker:/bitnami/postgresql
+    ports:
+      - 5454:5432
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USERNAME=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DATABASE=${DATABASE_NAME}
+      - POSTGRES_HOST_AUTH_METHOD= "trust"
+      - POSTGRESQL_POSTGRES_PASSWORD= ${DATABASE_PASSWORD}
+      

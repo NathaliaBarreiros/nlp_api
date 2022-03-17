@@ -1,0 +1,4 @@
+{
+    "python.analysis.extraPaths": ["./nlp_api"],
+    "python.formatting.provider": "black"
+}
