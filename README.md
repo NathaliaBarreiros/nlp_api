@@ -27,7 +27,7 @@ $ docker-compose exec nlp_fastapi_server alembic upgrade head
 This creates a sample user on databasse with **username: admin@admin.com** and **pass: admin**
 
 ```
-docker-compose exec fastapi_server python app/initial_data.py
+docker-compose exec nlp_fastapi_server python app/initial_data.py
 ```
 
 You can connect to Database using pgAdmin4 and use the credentials from .env file. Database port on local machine has been configured to **5454** on docker-compose.yml file
