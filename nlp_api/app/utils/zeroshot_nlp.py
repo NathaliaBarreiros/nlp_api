@@ -7,10 +7,9 @@ model = AutoModelForSequenceClassification.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 classificator = pipeline("zero-shot-classification", model=model, tokenizer=tokenizer)
-print("OJO")
 
 
-async def analyze_text(text, labels) -> list[str, list[str], dict[str, str]]:
+async def analyze_text(text, labels) -> list[str, list[str], dict[str, float]]:
     loop = asyncio.get_event_loop()
     candidate_labels = labels
     result = await loop.run_in_executor(None, classificator, text, candidate_labels)
@@ -19,6 +18,6 @@ async def analyze_text(text, labels) -> list[str, list[str], dict[str, str]]:
     labels = result["labels"]
     scores = result["scores"]
 
-    res = {labels[i]: str(scores[i]) for i in range(len(labels))}
+    res = {labels[i]: scores[i] for i in range(len(labels))}
 
     return [text, candidate_labels, res]

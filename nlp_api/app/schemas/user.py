@@ -1,9 +1,7 @@
 from app.models.user import UserBase
-
-# from app.models.group import GroupBase
 from pydantic import BaseModel, EmailStr
 from .role import IRoleRead
-from typing import Optional, List
+from typing import Optional
 
 
 class IUserCreate(BaseModel):
@@ -20,14 +18,9 @@ class IUserReadWithoutGroups(UserBase):
     role: Optional[IRoleRead] = None
 
 
-# class IGroupRead(GroupBase):
-#     id: int
-
-
 class IUserRead(UserBase):
     id: int
     role: Optional[IRoleRead] = None
-    # groups: List[IGroupRead] = []
 
 
 class IUserUpdate(BaseModel):
