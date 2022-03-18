@@ -1,4 +1,4 @@
-# Transformers models for Natural Language Processing API based on FastAPI, SQLModel, PostgreSQL, Alembic & Docker
+# Natural Language Processing API based on Transformers models, FastAPI, SQLModel, PostgreSQL, Alembic & Docker
 
 This project is a Rest API which uses [XLM-roBERTa-base model](https://huggingface.co/daveni/twitter-xlm-roberta-emotion-es) for emotion analysis in texts and [Zero-shot SELECTRA model](https://huggingface.co/Recognai/zeroshot_selectra_medium) for zero-shot classification, both for Spanish language.
 <br>
@@ -35,7 +35,7 @@ You can connect to Database using pgAdmin4 and use the credentials from .env fil
 ## ERD Database model
 
 <p align="center">
-  <img src="static/transformers-api-entities.drawio.png" align="center"/>
+  <img src="static/transformers-api-entities.png" align="center"/>
 </p>
 
 Documentation: [http://localhost:8000/docs](http://localhost:8000/docs)
