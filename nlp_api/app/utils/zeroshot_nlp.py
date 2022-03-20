@@ -19,5 +19,4 @@ async def analyze_text(text, labels) -> list[str, list[str], dict[str, float]]:
     scores = result["scores"]
 
     res = {labels[i]: scores[i] for i in range(len(labels))}
-
     return [text, candidate_labels, res]
