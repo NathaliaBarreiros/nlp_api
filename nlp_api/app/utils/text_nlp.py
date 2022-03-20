@@ -18,12 +18,16 @@ def preprocess(text):
     return " ".join(new_text)
 
 
+def inference_model(text: str, model):
+    return model(**text)
+
+
 async def analyze_text(text) -> list[str, dict[str, float]]:
+
     loop = asyncio.get_event_loop()
     text = await loop.run_in_executor(None, preprocess, text)
     encoded_input = tokenizer(text, return_tensors="pt")
-    # output = await loop.run_in_executor(None, model, **encoded_input)
-    output = model(**encoded_input)
+    output = await loop.run_in_executor(None, inference_model, encoded_input, model)
     scores = output[0][0].detach().numpy()
     scores = softmax(scores)
     # Print labels and scores
@@ -38,5 +42,4 @@ async def analyze_text(text) -> list[str, dict[str, float]]:
         labels.append(l)
         probs.append(np.round(float(s), 4))
     my_dict = {labels[i]: probs[i] for i in range(len(labels))}
-
     return [text, my_dict]
