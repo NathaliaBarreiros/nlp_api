@@ -10,12 +10,14 @@ from datetime import datetime
 
 
 class CRUDUser(CRUDBase[User, IUserCreate, IUserUpdate]):
-    async def get_by_email(self, db_session: AsyncSession, *, email: str) -> Optional[User]:
-        users =  await db_session.exec(select(User).where(User.email == email))
+    async def get_by_email(
+        self, db_session: AsyncSession, *, email: str
+    ) -> Optional[User]:
+        users = await db_session.exec(select(User).where(User.email == email))
         return users.first()
 
     async def get_user_by_id(self, db_session: AsyncSession, id: int) -> Optional[User]:
-        return await super().get(db_session, id)
+        return await super().get(db_session, id=id)
 
     async def create(self, db_session: AsyncSession, *, obj_in: IUserCreate) -> User:
         db_obj = User(
@@ -26,7 +28,7 @@ class CRUDUser(CRUDBase[User, IUserCreate, IUserUpdate]):
             hashed_password=get_password_hash(obj_in.password),
             created_at=datetime.utcnow(),
             updated_at=datetime.utcnow(),
-            role_id=obj_in.role_id
+            role_id=obj_in.role_id,
         )
         db_session.add(db_obj)
         await db_session.commit()
