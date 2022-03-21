@@ -26,6 +26,7 @@ torch = "^1.11.0"
 update = "^0.0.1"
 numpy = "^1.22.3"
 scipy = "^1.8.0"
+fastapi-pagination = {extras = ["sqlmodel"], version = "^0.9.1"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

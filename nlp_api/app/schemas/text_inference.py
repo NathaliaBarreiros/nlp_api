@@ -9,7 +9,7 @@ class TextInferenceCreate(TextInferenceBase):
 
 
 class TextInferenceRead(TextInferenceBase):
-    # id: int
+    id: int
     result: dict[str, float]
     created_by: UserBase
 
