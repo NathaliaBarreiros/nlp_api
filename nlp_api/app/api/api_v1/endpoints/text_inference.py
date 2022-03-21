@@ -17,7 +17,6 @@ from app import crud
 from app.models import TextInference
 from app.models import TextInferenceBase
 from app.models.user import User
-from app.models.text_inference import TextInference
 from sqlmodel import select
 
 router = APIRouter()

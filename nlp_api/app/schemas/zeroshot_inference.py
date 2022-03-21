@@ -9,7 +9,7 @@ class ZeroShotInferenceCreate(ZeroShotInferenceBase):
 
 
 class ZeroShotInferenceRead(ZeroShotInferenceBase):
-    # id: int
+    id: int
     result: dict[str, float]
     created_by: UserBase
 
